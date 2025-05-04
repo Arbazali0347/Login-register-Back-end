@@ -1,0 +1,24 @@
+<% include ./partiens/head.ejs %>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form action="/user-details" method="POST">
+      <div class="input-group">
+        <label for="Fisrt-name">Fisrt Name</label>
+        <input type="text" id="username" name="First" required>
+      </div>
+      <div class="input-group">
+        <label for="Last-name">Last Name</label>
+        <input type="text" id="email" name="Last" required>
+      </div>
+      <div class="input-group">
+        <label for="Discription">Discription</label>
+        <textarea name="Discription" class="Discription"></textarea>
+      </div>
+      <button type="submit">Done</button>
+    </form>
+    <br>
+  </div>
+</body>
+</html>
+<% include ./partiens/head.ejs %>
