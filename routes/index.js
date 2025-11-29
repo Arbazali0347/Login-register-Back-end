@@ -4,7 +4,6 @@ var router = express.Router();
 const UserModel = require("./users");
 const passport = require("passport");
 const LocalStrategy = require('passport-local');
-const { render } = require('../app');
 
 passport.use(new LocalStrategy(UserModel.authenticate()));
 /* GET home page. */
@@ -14,8 +13,9 @@ router.get('/', function (req, res, next) {
 
 router.get('/profile', isLoggedIn , async function (req, res, next) {
   const user = await UserModel.findOne({username: req.session.passport.user})
+  console.log("You Name is" + user)
   res.render('profile', {footer: true, user})
-});``
+});
 
 router.get('/user-details-page', isLoggedIn, function (req, res, next) {
   res.render('user-details');
@@ -28,7 +28,6 @@ router.post('/user-details', isLoggedIn ,async function (req, res, next) {
     lastname: Last,
     description: Discription
   },{new: true});
-  console.log(user)
   res.redirect("/profile")
 });
 
@@ -38,7 +37,6 @@ router.get('/register-page' ,function (req, res, next) {
 
 router.post('/register', function (req, res, next) {
   const { username, password, email } = req.body;
-  
   const userdata = new UserModel({
     username: username,
     email: email
@@ -69,14 +67,14 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: "/login-page"
 }), function(req, res, next){
   res.redirect("/profile");
-})
+});
 
 router.get('/logout', function(req, res, next){
   req.logout(function(err){
     if (err) { return next(err)}
     res.redirect("/")
   })
-})
+});
 
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){

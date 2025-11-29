@@ -37,9 +37,18 @@
       justify-content: space-between;
     }
 
-    .profile-img {
+    .Image {
       border-radius: 50%;
-      border: 4px solid #374151;
+      height: 80px;
+      width: 80px;
+      border: 1px solid #ffffff;
+      background-color: #ffffff;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .Image img{
+      object-fit: cover;
+      width: 85px;
     }
 
     .about {
@@ -116,7 +125,10 @@
   <div class="container">
     <div class="card">
       <div class="profile-header">
-        Tailwindcss
+        <div class="Image">
+          <img src="/images/newa.jpg" alt="">
+          <input id="ImageInput" hidden type="file" name="Image">
+        </div>
         <div>
           <h1><%= user.firstname %> <%= user.lastname %></h1>
           <p><%= user.description %></p>
@@ -145,6 +157,11 @@
       </div>
     </div>
   </div>
+  <script>
+    document.querySelector('.Image').addEventListener("click", function(){
+      document.querySelector("#ImageInput").click();
+    })
+  </script>
 </body>
 
 </html>
